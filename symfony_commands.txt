@@ -1,0 +1,77 @@
+######################################
+Git commands :
+---------------
+Problem 
+Cloning into foo-private...
+Password:
+error: error setting certificate verify locations:
+  CAfile: /bin/curl-ca-bundle.crt
+  CApath: none
+ while accessing https://foo@github.com/foo/foo-private.git/info/refs
+
+fatal: HTTP request failed
+
+Solution  : uce the following command to specify the ca-bundle.crt location
+    git config --system http.sslcainfo "D:\Program Files\Git\mingw64\ssl\certs\ca-bundle.crt"
+
+git config --system http.sslcainfo "D:\Program Files\Git\mingw64\ssl\certs\ca-bundle.crt"	
+git config --global user.name "OUSSAMA-EZZIOURI"
+git config --global user.email oussama.ezziouri@gmail.com
+
+--- To clone a remote repository in local folder
+git clone https://github.com/OUSSAMA-EZZIOURI/todolist.git
+
+--- To push a local folder to a remote repository
+   Go back to your project in the terminal/command line.
+   In your terminal/command line, type git remote add origin [copied web address]
+Example: git remote add origin https://github.com/OUSSAMA-EZZIOURI/todolist.git
+
+    Push your branch to Github: git push origin master
+
+---After doing your changes add the files to git
+git add (file names)    
+git status
+
+--- Set a commit message
+git commit -m "First commit" [file name]
+
+--- Push origin to master
+git push -u origin master 
+
+Create a new branch named issue1.
+git branch <branch_name> 
+
+Use the checkout command to switch branch.
+git checkout <branch> 
+
+We can delete a branch by calling the branch command and passing in the -d option, followed by the branch name.
+git branch -d <branchname> 
+
+######################################
+Recipes :
+-----------
+//to use asset function/recipe in twig pages
+composer require asset
+
+Clear the cache 
+---------------
+php ./bin/console cache:clear
+
+Run the server
+--------------
+php ./bin/console server:run
+
+Listing all routes in the app :
+-------------------------------
+php ./bin/console debug:router
+
+
+
+######################################
+Functions :
+-----------
+
+Generating path :
+<a href="{{ path('app_task_homepage') }}">Home</a>
+
+Define route name:
