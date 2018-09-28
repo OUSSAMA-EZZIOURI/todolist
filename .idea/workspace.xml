@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f6b10633-b3f1-4b10-ba4d-71284d2cb9b3" name="Default Changelist" comment="" />
+    <list default="true" id="f6b10633-b3f1-4b10-ba4d-71284d2cb9b3" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,9 +21,15 @@
           <entry key="project.opened" value="1" />
         </counts>
       </usages-collector>
+      <usages-collector id="statistics.vcs.git.usages">
+        <counts>
+          <entry key="git.branch.rename" value="1" />
+        </counts>
+      </usages-collector>
     </session>
   </component>
   <component name="Git.Settings">
+    <option name="ROOT_SYNC" value="SYNC" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
@@ -156,6 +164,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="tasks.servers" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -179,12 +188,18 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1538152650681</updated>
-      <workItem from="1538152652225" duration="701000" />
+      <workItem from="1538152652225" duration="2595000" />
     </task>
-    <servers />
+    <servers>
+      <GitHub url="https://github.com">
+        <token>df93df9ddfcfdfcfdf99dfcedf98df9fdf98dfc9dfc9df92df9ddf98df9edfc8df98dfccdf93df98df92dfcedf9fdfcedf9fdfcedfc9df9bdf93df99df9fdf98df9fdfccdf98dfc9df9adfc8df93df92</token>
+        <option name="repoAuthor" value="OUSSAMA-EZZIOURI" />
+        <option name="repoName" value="todolist" />
+      </GitHub>
+    </servers>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="701000" />
+    <option name="totallyTimeSpent" value="2595000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
