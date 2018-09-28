@@ -16,46 +16,24 @@
                 {% else %}
                     <tr>
                 {% endif %}
-                <th scope="row">1</th>
+                <td scope="row">
+                    <input type="checkbox" class="form-check-input">
+                </td>
                 <td>{% if task[2] == 'done' %}
                         <p class="done">{{ task[0] }}</p>
                     {% else %}
-                        <p class="open">{{ task[0] }}</p>
+                        <p class="">{{ task[0] }}</p>
                     {% endif %}</td>
                 <td>12 octobre 2019</td>
                 <td>
                     <div class="btn-group" role="group" aria-label="Basic example">
                         <button type="button" class="btn btn-success">Done</button>
-                        <button type="button" class="btn btn-cancel">Middle</button>
+                        <button type="button" class="btn btn-cancel">Remove</button>
                     </div>
                 </td>
                 </tr>
             {% endfor %}
-            <tr>
-                <th scope="row">1</th>
-                <td>While we haven’t tried these out, they do look promising and provide multiple formats—including
-                    SVG.While we haven’t tried these out, they do look promising and provide multiple formats—including
-                    SVG.
-                </td>
-                <td>12 septembre 2019</td>
-                <td>
-                    <div class="btn-group" role="group" aria-label="Basic example">
-                        <button type="button" class="btn btn-success">Done</button>
-                        <button type="button" class="btn btn-cancel">Middle</button>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">1</th>
-                <td>Task 1</td>
-                <td>@mdo</td>
-                <td>
-                    <div class="btn-group" role="group" aria-label="Basic example">
-                        <button type="button" class="btn btn-success">Done</button>
-                        <button type="button" class="btn btn-cancel">Middle</button>
-                    </div>
-                </td>
-            </tr>
+
             </tbody>
         </table>
 
