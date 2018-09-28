@@ -25,24 +25,12 @@ class TaskController extends AbstractController
 
         //return new Response($msg);
         return $this->render('task/index.html.twig', ['tasks' => $tasks]);
-    }/**
-     * @Route("/", name="app_done_list" )
-     */
-    public function done()
-    {
-        $tasks = [
-            ['I ate a normal rock once. It did NOT taste like bacon!','danger'],
-            ['Woohoo! I\'m going on an all-asteroid diet!', 'primary'],
-            ['I like bacon too! Buy some from my site! bakinsomebacon.com','primary'],
-        ];
-
-
-        //return new Response($msg);
-        return $this->render('task/done.html.twig', ['tasks' => $tasks]);
     }
 
+
+
     /**
-     * @Route("/task/", name="app_homepage" )
+     * @Route("/tasks/", name="app_homepage" )
      */
     public function task()
     {
@@ -50,7 +38,7 @@ class TaskController extends AbstractController
     }
 
     /**
-     * @Route("/task/{slug}", name="app_show_task")
+     * @Route("/show/{slug}", name="app_show_task")
      */
     public function show($slug)
     {
@@ -70,5 +58,21 @@ class TaskController extends AbstractController
             'created_at' => $created_at,
             'comments' => $comments,
         ]);
+    }
+
+    /**
+     * @Route("/", name="app_done_list" )
+     */
+    public function done()
+    {
+        $tasks = [
+            ['I ate a normal rock once. It did NOT taste like bacon!','danger'],
+            ['Woohoo! I\'m going on an all-asteroid diet!', 'primary'],
+            ['I like bacon too! Buy some from my site! bakinsomebacon.com','primary'],
+        ];
+
+
+        //return new Response($msg);
+        return $this->render('task/done.html.twig', ['tasks' => $tasks]);
     }
 }
