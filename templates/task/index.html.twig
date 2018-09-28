@@ -8,7 +8,7 @@
 
         <h1>Tasks list</h1>
         <br/><br/>
-        <table class="table table-hover">
+        <table id="tasks_list" class="table table-hover">
             <tbody>
             {% for task in tasks %}
                 {% if task[1] == 'danger' %}
@@ -18,9 +18,9 @@
                 {% endif %}
                 <th scope="row">1</th>
                 <td>{% if task[2] == 'done' %}
-                        <strike>{{ task[0] }}</strike>
+                        <p class="done">{{ task[0] }}</p>
                     {% else %}
-                        {{ task[0] }}
+                        <p class="open">{{ task[0] }}</p>
                     {% endif %}</td>
                 <td>12 octobre 2019</td>
                 <td>
@@ -62,4 +62,9 @@
 
     </main>
 
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/set_task_status.js') }}"></script>
 {% endblock %}
