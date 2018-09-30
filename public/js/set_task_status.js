@@ -6,4 +6,20 @@ $(document).ready(function() {
 
         $clicked_col.find('p').toggleClass('done');
     });
+
+    $('.js-like-task').on('click', function(e) {
+        e.preventDefault();
+
+        var $link = $(e.currentTarget);
+
+        $link.toggleClass('fas fa-heart').toggleClass('far fa-heart');
+
+        $.ajax({
+            method : 'POST',
+            url: $link.attr('href')
+        }).done(function(data){
+            $('.js-like-task-count').html(data.hearts);
+        })
+
+    });
 });

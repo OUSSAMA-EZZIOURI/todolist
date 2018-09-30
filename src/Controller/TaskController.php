@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use Psr\Container\ContainerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 //use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\Routing\Annotation\Route;
@@ -17,9 +19,9 @@ class TaskController extends AbstractController
     public function homepage()
     {
         $tasks = [
-            ['I ate a normal rock once. It did NOT taste like bacon!','danger', 'open'],
-            ['Woohoo! I\'m going on an all-asteroid diet!', 'primary', 'open'],
-            ['I like bacon too! Buy some from my site! bakinsomebacon.com','primary', 'done'],
+            [1, 'I ate a normal rock once. It did NOT taste like bacon!','danger', 'open'],
+            [2, 'Woohoo! I\'m going on an all-asteroid diet!', 'primary', 'open'],
+            [3, 'I like bacon too! Buy some from my site! bakinsomebacon.com','primary', 'done'],
         ];
 
 
@@ -57,11 +59,12 @@ class TaskController extends AbstractController
             'author' => $author,
             'created_at' => $created_at,
             'comments' => $comments,
+            'slug' => $slug
         ]);
     }
 
     /**
-     * @Route("/", name="app_done_list" )
+     * @Route("/done", name="app_done_list" )
      */
     public function done()
     {
@@ -74,5 +77,28 @@ class TaskController extends AbstractController
 
         //return new Response($msg);
         return $this->render('task/done.html.twig', ['tasks' => $tasks]);
+    }
+
+    /**
+     * @Route("/show/{slug}/heart", name="app_toggle_heart", methods={"POST"})
+     */
+    public function toggleArticleHeart($slug){
+        //TODO : Actually like/unlike the article !
+        return new JsonResponse(['hearts' => rand(0, 100)]);
+    }
+
+    /**
+     * @Route("/logout", name="app_logout")
+     */
+    public function logout(){
+        return $this->render('login.html.twig');
+    }
+
+    /**
+     * @Route("/login", name="app_login")
+     */
+    public function login(){
+        //TODO if the login and password are correct
+        return $this->task();
     }
 }
