@@ -11,24 +11,28 @@
         <table id="tasks_list" class="table table-hover">
             <tbody>
             {% for task in tasks %}
-                {% if task[1] == 'danger' %}
+                {% if task[2] == 'danger' %}
                     <tr class="table-danger">
                 {% else %}
                     <tr>
                 {% endif %}
                 <td scope="row">
-                    <input type="checkbox" class="form-check-input">
+                    <span class="fa-li"><i class="far fa-square"></i></span>
                 </td>
-                <td>{% if task[2] == 'done' %}
-                        <p class="done">{{ task[0] }}</p>
+                <td>{% if task[3] == 'done' %}
+                        <p class="done">{{ task[1] }}</p>
                     {% else %}
-                        <p class="">{{ task[0] }}</p>
+                        <p class="">{{ task[1] }}</p>
                     {% endif %}</td>
                 <td>12 octobre 2019</td>
                 <td>
                     <div class="btn-group" role="group" aria-label="Basic example">
-                        <button type="button" class="btn btn-success">Done</button>
-                        <button type="button" class="btn btn-cancel">Remove</button>
+                        <button type="button" class="btn btn-success">
+                            <div><i class="fas fa-check fa-fw" ></i></div>
+                        </button>
+                        <a class=" btn btn-dark" href="{{ path('app_show_task', {'slug': task[0]}) }}">
+                            <div><i class="fas fa-pencil-alt fa-fw" ></i></div>
+                        </a>
                     </div>
                 </td>
                 </tr>

@@ -9,7 +9,7 @@
 
     <div class="blog-post">
         <h2 class="blog-post-title">{{ title }}</h2>
-        <p class="blog-post-meta">{{ created_at }} by <a href="#">{{ author }}</a></p>
+        <p class="blog-post-meta">{{ created_at }} by <a href="#">{{ author }}</a> <span class="js-like-task-count">0</span> <a class="js-like-task far fa-heart" href="{{ path('app_toggle_heart', {slug: slug}) }}"  ></a></p>
 
         <p>This blog post shows a few different types of content that's supported and styled with Bootstrap. Basic typography, images, and code are all supported.</p>
         <hr>
@@ -37,4 +37,9 @@
     </div>
 </main>
 
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/set_task_status.js') }}"></script>
 {% endblock %}
