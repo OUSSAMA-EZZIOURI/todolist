@@ -16,5 +16,6 @@
 ###< symfony/web-server-bundle ###
 
 ###> workspace.xml ###
+.idea
 /.idea/workspace.xml
 ###< workspace.xml ###
