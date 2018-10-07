@@ -5,6 +5,7 @@ namespace App\Controller;
 use Psr\Container\ContainerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 //use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,21 +15,21 @@ class TaskController extends AbstractController
 {
 
     /**
-     * @Route("/", name="app_homepage" )
+     * @Route("/", name="homepage" )
      */
     public function homepage()
     {
+
         $tasks = [
-            [1, 'I ate a normal rock once. It did NOT taste like bacon!','danger', 'open'],
+            [1, 'I ate a normal rock once. It did NOT taste like bacon!', 'danger', 'open'],
             [2, 'Woohoo! I\'m going on an all-asteroid diet!', 'primary', 'open'],
-            [3, 'I like bacon too! Buy some from my site! bakinsomebacon.com','primary', 'done'],
+            [3, 'I like bacon too! Buy some from my site! bakinsomebacon.com', 'primary', 'done'],
         ];
 
 
         //return new Response($msg);
         return $this->render('task/index.html.twig', ['tasks' => $tasks]);
     }
-
 
 
     /**
@@ -69,9 +70,9 @@ class TaskController extends AbstractController
     public function done()
     {
         $tasks = [
-            ['I ate a normal rock once. It did NOT taste like bacon!','danger'],
+            ['I ate a normal rock once. It did NOT taste like bacon!', 'danger'],
             ['Woohoo! I\'m going on an all-asteroid diet!', 'primary'],
-            ['I like bacon too! Buy some from my site! bakinsomebacon.com','primary'],
+            ['I like bacon too! Buy some from my site! bakinsomebacon.com', 'primary'],
         ];
 
 
@@ -82,24 +83,38 @@ class TaskController extends AbstractController
     /**
      * @Route("/show/{slug}/heart", name="app_toggle_heart", methods={"POST"})
      */
-    public function toggleArticleHeart($slug){
+    public function toggleArticleHeart($slug)
+    {
         //TODO : Actually like/unlike the article !
         return new JsonResponse(['hearts' => rand(0, 100)]);
     }
 
     /**
+     * @Route("/new", name="app_new_task", methods={"POST", "GET"})
+     */
+    public function new(Request $request)
+    {
+        return $this->render('new.html.twig');
+    }
+
+    /**
      * @Route("/logout", name="app_logout")
      */
-    public function logout(){
+    public function logout()
+    {
         return $this->render('login.html.twig');
     }
 
 
     /**
-     * @Route("/login", name="app_login")
+     * @Route("/login", name="app_login", methods={"POST", "GET"})
      */
-    public function login(){
-        //TODO if the login and password are correct
-        return $this->task();
+    public function login()
+    {
+        if (count($_POST) != 0 && $_POST['email'] == "admin@admin.com" && $_POST["password"] == "admin")
+            return $this->task();
+        else
+            return $this->render('login.html.twig');
+
     }
 }
