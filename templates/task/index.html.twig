@@ -7,6 +7,14 @@
     <main role="main" class="container">
 
         <h1>Tasks list</h1>
+        <br/>
+        <div class="float-sm-right">
+            <button onclick="window.location ='{{ path('app_new_task') }}'" class="btn btn-success pull-right" >
+                <div>
+                    <i class="fas fa-plus fa-fw" ></i>
+                </div>
+            </button>
+        </div>
         <br/><br/>
         <table id="tasks_list" class="table table-hover">
             <tbody>
