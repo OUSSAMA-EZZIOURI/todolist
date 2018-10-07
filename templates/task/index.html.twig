@@ -19,7 +19,8 @@
         <table id="tasks_list" class="table table-hover">
             <tbody>
             {% for task in tasks %}
-                {% if task[2] == 'danger' %}
+
+                {% if task.priority == 'danger' %}
                     <tr class="table-danger">
                 {% else %}
                     <tr>
@@ -27,19 +28,19 @@
                 <td scope="row">
                     <span class="fa-li"><i class="far fa-square"></i></span>
                 </td>
-                <td>{% if task[3] == 'done' %}
-                        <p class="done">{{ task[1] }}</p>
+                <td>{% if task.status == 'done' %}
+                        <p class="done">{{ task.title }}</p>
                     {% else %}
-                        <p class="">{{ task[1] }}</p>
+                        <p class="">{{ task.title }}</p>
                     {% endif %}</td>
-                <td>12 octobre 2019</td>
+                <td> {% if task.deadline == null %} - {% else %} {{ task.deadline }} {% endif %}</td>
                 <td>
                     <div class="btn-group" role="group" aria-label="Basic example">
                         <button type="button" class="btn btn-success">
                             <div><i class="fas fa-check fa-fw" ></i></div>
                         </button>
-                        <a class=" btn btn-dark" href="{{ path('app_show_task', {'slug': task[0]}) }}">
-                            <div><i class="fas fa-pencil-alt fa-fw" ></i></div>
+                        <a class=" btn btn-dark" href="{{ path('app_show_task', {'id': task.id}) }}">
+                            <div><i class="fas fa-eye fa-fw" ></i></div>
                         </a>
                     </div>
                 </td>

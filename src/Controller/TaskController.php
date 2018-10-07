@@ -5,6 +5,12 @@ namespace App\Controller;
 use App\Entity\Task;
 use Psr\Container\ContainerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,12 +26,16 @@ class TaskController extends AbstractController
      */
     public function homepage()
     {
+        $tasks = $this->getDoctrine()
+                ->getRepository(Task::class)
+                ->findAll();
 
-        $tasks = [
+
+        /*$tasks = [
             [1, 'I ate a normal rock once. It did NOT taste like bacon!', 'danger', 'open'],
             [2, 'Woohoo! I\'m going on an all-asteroid diet!', 'primary', 'open'],
             [3, 'I like bacon too! Buy some from my site! bakinsomebacon.com', 'primary', 'done'],
-        ];
+        ];*/
 
 
         //return new Response($msg);
@@ -42,10 +52,12 @@ class TaskController extends AbstractController
     }
 
     /**
-     * @Route("/show/{slug}", name="app_show_task")
+     * @Route("/show/{id}", name="app_show_task")
      */
-    public function show($slug)
+    public function show($id)
     {
+
+        $task = $this->getDoctrine()->getRepository(Task::class)->find($id);
         //return new Response(sprintf("Show task number %s",$slug));
 
         $comments = [
@@ -55,14 +67,18 @@ class TaskController extends AbstractController
         ];
 
         $author = "Oussama";
-        $created_at = "Septembre 24, 2018";
-        return $this->render('task/show.html.twig', [
-            'title' => ucwords(str_replace('-', ' ', $slug)),
+        //$createTime = DateTime::createFromFormat("l dS F Y", $task->getCreateTime());
+        return $this->render('task/show.html.twig', ['task' => $task]);
+
+        /*[
+            'title' => ucwords(str_replace('-', ' ', $task->getTitle())),
+            'description' => $task->getDescription(),
             'author' => $author,
-            'created_at' => $created_at,
+            'created_at' => $task->getCreateTime(),
+            'deadline' => $task->getDeadline(),
             'comments' => $comments,
-            'slug' => $slug
-        ]);
+            'id' => $id
+        ]);*/
     }
 
     /**
@@ -82,9 +98,9 @@ class TaskController extends AbstractController
     }
 
     /**
-     * @Route("/show/{slug}/heart", name="app_toggle_heart", methods={"POST"})
+     * @Route("/show/{id}/heart", name="app_toggle_heart", methods={"POST"})
      */
-    public function toggleArticleHeart($slug)
+    public function toggleArticleHeart($id)
     {
         //TODO : Actually like/unlike the article !
         return new JsonResponse(['hearts' => rand(0, 100)]);
@@ -95,7 +111,16 @@ class TaskController extends AbstractController
      */
     public function new(Request $request)
     {
-        return $this->render('new.html.twig');
+        $task = new Task();
+        $form = $this->createFormBuilder($task)
+            ->add('title', TextType::class, array('attr' => array('class' => 'form-control')))
+            ->add('description', TextareaType::class, array('required' => false, 'attr' => array('class' => 'form-control')))
+            ->add('deadline', DateTimeType::class, array('required'  => false, 'attr' => array('class' => 'form-control')))
+            ->add('priority', ChoiceType::class, array('required'  => false, 'choices'=>array('High'=>'High', 'Normal'=>'Normal', 'Low'=>'Low'),  'attr' => array('class' => 'form-control')))
+            ->add('save', SubmitType::class, array('label' => 'Save', 'attr' => array('class' => 'btn btn-sm mt-3')))
+            ->getForm();
+
+        return $this->render('new.html.twig', ['form' => $form->createView()]);
     }
 
     /**
