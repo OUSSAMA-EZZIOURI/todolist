@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Task;
 use Psr\Container\ContainerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -117,4 +118,26 @@ class TaskController extends AbstractController
             return $this->render('login.html.twig');
 
     }
+
+    /**
+     * @Route("/save")
+     */
+    public function save()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $task = new Task();
+        $task->setTitle("New task 1")
+            ->setDescription("Hello new task 1")
+            ->setStatus("open")
+            ->setPriority("normal")
+            ->setCreateTime(new \DateTime('now'));
+
+        $em->persist($task);
+        $em->flush();
+
+        return new Response("Saved task with id " . $task->getId());
+
+
+    }
+
 }
