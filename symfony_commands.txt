@@ -73,7 +73,15 @@ php ./bin/console debug:autowiring
 
 
 ######################################
+Install Apache pack
+-------------------------
+Adding Rewrite Rules
+composer require symfony/apache-pack
+
+
+######################################
 Install Doctrine
+-------------------------
 composer require doctrine maker
 
 1- Open .env and change the line bellow according to your case
