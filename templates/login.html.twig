@@ -19,22 +19,29 @@
                 <h2>Admin Login</h2>
                 <p>Please enter your email and password</p>
             </div>
+            {{ error  }}
             <form id="Login" action="{{ path('app_login') }}" method="post">
 
                 <div class="form-group">
 
-                    <input type="email" name="email" class="form-control" id="inputEmail" placeholder="Email Address">
+                    <input type="email" name="email" class="form-control" id="inputEmail" placeholder="Email Address" value="{{ last_username }}">
 
                 </div>
 
                 <div class="form-group">
 
-                    <input type="password" name="password" class="form-control" id="inputPassword" placeholder="Password">
+                    <input type="password" name="password" class="form-control" id="inputPassword" placeholder="Password" required>
 
                 </div>
-                <div class="forgot">
-                    <a href="reset.html">Forgot password?</a>
+                {% if error %}
+                <div class="alert alert-danger">
+                    <strong>Failed :</strong> {{ error  }}
                 </div>
+                {% endif %}
+
+                {#<div class="forgot">
+                    <a href="reset.html">Forgot password?</a>
+                </div>#}
                 <button type="submit" class="btn btn-primary">Login</button>
 
             </form>

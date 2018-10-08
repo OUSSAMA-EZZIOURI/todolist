@@ -8,7 +8,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
-class User implements UserInterface
+class User implements UserInterface, \Serializable
 {
     /**
      * @ORM\Id()
@@ -16,11 +16,6 @@ class User implements UserInterface
      * @ORM\Column(type="integer")
      */
     private $id;
-
-    /**
-     * @ORM\Column(type="string", length=255, unique=true)
-     */
-    private $login;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -50,18 +45,6 @@ class User implements UserInterface
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getLogin(): ?string
-    {
-        return $this->login;
-    }
-
-    public function setLogin(string $login): self
-    {
-        $this->login = $login;
-
-        return $this;
     }
 
     public function getFname(): ?string
@@ -176,5 +159,25 @@ class User implements UserInterface
     public function eraseCredentials()
     {
         // TODO: Implement eraseCredentials() method.
+    }
+
+    public function serialize()
+    {
+        return $this->serialize([
+            $this->id,
+            $this->fname,
+            $this->lname,
+            $this->email,
+            $this->password
+        ]);
+    }
+
+    public function unserialize($string)
+    {
+        list($this->id,
+            $this->fname,
+            $this->lname,
+            $this->email,
+            $this->password) = unserialize($string, ['allowed_classes' => false]);
     }
 }

@@ -123,13 +123,7 @@ class TaskController extends AbstractController
         return $this->render('new.html.twig', ['form' => $form->createView()]);
     }
 
-    /**
-     * @Route("/logout", name="app_logout")
-     */
-    public function logout()
-    {
-        return $this->render('login.html.twig');
-    }
+
 
 
     /**

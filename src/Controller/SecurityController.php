@@ -3,11 +3,12 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
-class SecurityController extends AbstractController
+class SecurityController extends Controller
 {
     /**
      * @Route("/login", name="app_login", methods={"POST", "GET"})
@@ -17,9 +18,10 @@ class SecurityController extends AbstractController
         $error = $utils->getLastAuthenticationError();
         $lastUsername =$utils->getLastUsername();
 
+
         return $this->render('login.html.twig', [
             'error' => $error,
-            'lastUsername' => $lastUsername,
+            'last_username' => $lastUsername,
         ]);
 
         /*if (count($_POST) != 0 && $_POST['email'] == "admin@admin.com" && $_POST["password"] == "admin") {
@@ -29,5 +31,14 @@ class SecurityController extends AbstractController
         else
             return $this->render('login.html.twig');*/
 
+    }
+
+    /**
+     * @Route("/logout", name="app_logout")
+     */
+    public function logout()
+    {
+
+        return $this->login();
     }
 }
