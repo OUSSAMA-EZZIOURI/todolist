@@ -134,7 +134,7 @@ class TaskController extends AbstractController
 
     /**
      * @Route("/login", name="app_login", methods={"POST", "GET"})
-     */
+
     public function login()
     {
         if (count($_POST) != 0 && $_POST['email'] == "admin@admin.com" && $_POST["password"] == "admin")
@@ -142,7 +142,7 @@ class TaskController extends AbstractController
         else
             return $this->render('login.html.twig');
 
-    }
+    }*/
 
     /**
      * @Route("/save")
