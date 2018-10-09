@@ -4,7 +4,7 @@ security:
         App\Entity\User:
             algorithm: bcrypt
     providers:
-        my_provider:
+        app_user_provider:
             entity:
                 class:  App\Entity\User
                 property:   email
