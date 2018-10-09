@@ -114,6 +114,14 @@ composer require orm-fixtures --dev
 php ./bin/console make:fixtures
 UserFixtures
 
+10-  Next: Open your new fixtures class and start customizing it.
+     Load your fixtures by running:
+php ./bin/console doctrine:fixtures:load
+
+11- Creating authenticator :
+
+php bin/console make:auth
+
 ######################################
 Functions :
 -----------
