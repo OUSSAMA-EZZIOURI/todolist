@@ -42,31 +42,36 @@ class User implements UserInterface, \Serializable
      */
     private $email;
 
+    /**
+     * @ORM\Column(type="json", nullable=true)
+     */
+    private $roles = [];
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getFname(): ?string
+    public function getFirstName(): ?string
     {
         return $this->fname;
     }
 
-    public function setFname(string $fname): self
+    public function setFirstName(string $firstName): self
     {
-        $this->fname = $fname;
+        $this->fname = $firstName;
 
         return $this;
     }
 
-    public function getLname(): ?string
+    public function getLastName(): ?string
     {
         return $this->lname;
     }
 
-    public function setLname(string $lname): self
+    public function setLastName(string $lastName): self
     {
-        $this->lname = $lname;
+        $this->lname = $lastName;
 
         return $this;
     }
@@ -147,7 +152,7 @@ class User implements UserInterface, \Serializable
      */
     public function getUsername()
     {
-        // TODO: Implement getUsername() method.
+        return $this->getFirstName(). " " . $this->getLastName();
     }
 
     /**
@@ -179,5 +184,12 @@ class User implements UserInterface, \Serializable
             $this->lname,
             $this->email,
             $this->password) = unserialize($string, ['allowed_classes' => false]);
+    }
+
+    public function setRoles(?array $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
     }
 }
