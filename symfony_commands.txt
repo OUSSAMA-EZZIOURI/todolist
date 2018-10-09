@@ -106,6 +106,15 @@ php ./bin/console doctrine:query:sql "SELECT * FROM task"
 8- Create a controller for 'Task' entity
 php ./bin/console make:controller
 ######################################
+Fixtures :
+-----------
+9- Insert some dummy users in the new table (install orm-fixtures --dev package
+composer require orm-fixtures --dev
+
+php ./bin/console make:fixtures
+UserFixtures
+
+######################################
 Functions :
 -----------
 Define a route name in the controller:
