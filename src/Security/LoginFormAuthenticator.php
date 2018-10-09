@@ -7,13 +7,13 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
-use Symfony\Component\Security\Guard\AbstractGuardAuthenticator;
+use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticator;
 
-class LoginFormAuthenticator extends AbstractGuardAuthenticator
+class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 {
     public function supports(Request $request)
     {
-        // todo
+        die('Our authenticator is alive!');
     }
 
     public function getCredentials(Request $request)
@@ -49,5 +49,15 @@ class LoginFormAuthenticator extends AbstractGuardAuthenticator
     public function supportsRememberMe()
     {
         // todo
+    }
+
+    /**
+     * Return the URL to the login page.
+     *
+     * @return string
+     */
+    protected function getLoginUrl()
+    {
+        // TODO: Implement getLoginUrl() method.
     }
 }

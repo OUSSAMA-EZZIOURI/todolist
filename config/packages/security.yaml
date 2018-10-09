@@ -15,13 +15,16 @@ security:
             security: false
         main:
             anonymous: true
-            form_login:
-                login_path: login
-                check_path: login
-                provider:   my_provider
-            logout:
-                path: /logout
-                target : /
+            guard:
+                authenticators:
+                    - App\Security\LoginFormAuthenticator
+#            form_login:
+#                login_path: login
+#                check_path: login
+#                provider:   my_provider
+#            logout:
+#                path: /logout
+#                target : /
             # activate different ways to authenticate
 
             # http_basic: true
