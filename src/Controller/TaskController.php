@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Task;
+use App\Repository\TaskRepository;
 use Psr\Container\ContainerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -24,19 +25,9 @@ class TaskController extends AbstractController
     /**
      * @Route("/", name="homepage" )
      */
-    public function homepage()
+    public function homepage(TaskRepository $repository)
     {
-        $tasks = $this->getDoctrine()
-                ->getRepository(Task::class)
-                ->findAll();
-
-
-        /*$tasks = [
-            [1, 'I ate a normal rock once. It did NOT taste like bacon!', 'danger', 'open'],
-            [2, 'Woohoo! I\'m going on an all-asteroid diet!', 'primary', 'open'],
-            [3, 'I like bacon too! Buy some from my site! bakinsomebacon.com', 'primary', 'done'],
-        ];*/
-
+        $tasks = $repository->findAll();
 
         //return new Response($msg);
         return $this->render('task/index.html.twig', ['tasks' => $tasks]);
