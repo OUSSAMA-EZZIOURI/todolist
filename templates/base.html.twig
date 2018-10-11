@@ -36,7 +36,7 @@
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">
-                    <div><i class="fas fa-user-circle fa-fw"></i> Dropdown link</div>
+                    <div><i class="fas fa-user-circle fa-fw"></i> {{ app.user.username }}</div>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href="#">
@@ -46,7 +46,7 @@
                         <div><i class="fas fa-unlock fa-fw"></i> Change password</div>
                     </a>
                     <a class="dropdown-item" href="{{ path("app_logout") }}">
-                        <div><i class="fas fa-sign-out-alt fa-fw"></i> Disconnect</div>
+                        <div><i class="fas fa-sign-out-alt fa-fw"></i> Logout</div>
                     </a>
                 </div>
             </li>

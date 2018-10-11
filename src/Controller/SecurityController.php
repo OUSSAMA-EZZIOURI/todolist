@@ -25,13 +25,6 @@ class SecurityController extends AbstractController
             'last_username' => $lastUsername,
         ]);
 
-        /*if (count($_POST) != 0 && $_POST['email'] == "admin@admin.com" && $_POST["password"] == "admin") {
-            $task_c = new TaskController();
-            return $task_c->task();
-        }
-        else
-            return $this->render('login.html.twig');*/
-
     }
 
     /**
@@ -40,6 +33,6 @@ class SecurityController extends AbstractController
     public function logout()
     {
 
-        return $this->login();
+        //return $this->login();
     }
 }

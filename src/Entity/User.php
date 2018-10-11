@@ -8,7 +8,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
-class User implements UserInterface, \Serializable
+class User implements UserInterface
+    //, \Serializable
 {
     /**
      * @ORM\Id()
@@ -46,6 +47,11 @@ class User implements UserInterface, \Serializable
      * @ORM\Column(type="json", nullable=true)
      */
     private $roles = [];
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $username;
 
     public function getId(): ?int
     {
@@ -152,7 +158,7 @@ class User implements UserInterface, \Serializable
      */
     public function getUsername()
     {
-        return $this->getFirstName(). " " . $this->getLastName();
+        return $this->username;
     }
 
     /**
@@ -166,29 +172,40 @@ class User implements UserInterface, \Serializable
         // TODO: Implement eraseCredentials() method.
     }
 
-    public function serialize()
-    {
-        return $this->serialize([
-            $this->id,
-            $this->fname,
-            $this->lname,
-            $this->email,
-            $this->password
-        ]);
-    }
-
-    public function unserialize($string)
-    {
-        list($this->id,
-            $this->fname,
-            $this->lname,
-            $this->email,
-            $this->password) = unserialize($string, ['allowed_classes' => false]);
-    }
+//    public function serialize()
+//    {
+//        return $this->serialize([
+//            $this->id,
+//            $this->fname,
+//            $this->lname,
+//            $this->email,
+//            $this->password,
+//            $this->username,
+//            $this->agency
+//        ]);
+//    }
+//
+//    public function unserialize ($string)
+//    {
+//        list($this->id,
+//            $this->fname,
+//            $this->lname,
+//            $this->email,
+//            $this->password,
+//            $this->username,
+//            $this->agency) = unserialize($string, ['allowed_classes' => false]);
+//    }
 
     public function setRoles(?array $roles): self
     {
         $this->roles = $roles;
+
+        return $this;
+    }
+
+    public function setUsername(string $username): self
+    {
+        $this->username = $username;
 
         return $this;
     }

@@ -25,9 +25,19 @@ class TaskController extends AbstractController
     /**
      * @Route("/", name="homepage" )
      */
-    public function homepage(TaskRepository $repository)
+    public function homepage()
     {
-        $tasks = $repository->findAll();
+        $tasks = $this->getDoctrine()
+            ->getRepository(Task::class)
+            ->findAll();
+
+
+        /*$tasks = [
+            [1, 'I ate a normal rock once. It did NOT taste like bacon!', 'danger', 'open'],
+            [2, 'Woohoo! I\'m going on an all-asteroid diet!', 'primary', 'open'],
+            [3, 'I like bacon too! Buy some from my site! bakinsomebacon.com', 'primary', 'done'],
+        ];*/
+
 
         //return new Response($msg);
         return $this->render('task/index.html.twig', ['tasks' => $tasks]);
@@ -106,8 +116,8 @@ class TaskController extends AbstractController
         $form = $this->createFormBuilder($task)
             ->add('title', TextType::class, array('attr' => array('class' => 'form-control')))
             ->add('description', TextareaType::class, array('required' => false, 'attr' => array('class' => 'form-control')))
-            ->add('deadline', DateTimeType::class, array('required'  => false, 'attr' => array('class' => 'form-control')))
-            ->add('priority', ChoiceType::class, array('required'  => false, 'choices'=>array('High'=>'High', 'Normal'=>'Normal', 'Low'=>'Low'),  'attr' => array('class' => 'form-control')))
+            ->add('deadline', DateTimeType::class, array('required' => false, 'attr' => array('class' => 'form-control')))
+            ->add('priority', ChoiceType::class, array('required' => false, 'choices' => array('High' => 'High', 'Normal' => 'Normal', 'Low' => 'Low'), 'attr' => array('class' => 'form-control')))
             ->add('save', SubmitType::class, array('label' => 'Save', 'attr' => array('class' => 'btn btn-sm mt-3')))
             ->getForm();
 
@@ -119,15 +129,15 @@ class TaskController extends AbstractController
 
     /**
      * @Route("/login", name="app_login", methods={"POST", "GET"})
-
-    public function login()
-    {
-        if (count($_POST) != 0 && $_POST['email'] == "admin@admin.com" && $_POST["password"] == "admin")
-            return $this->task();
-        else
-            return $this->render('login.html.twig');
-
-    }*/
+     *
+     * public function login()
+     * {
+     * if (count($_POST) != 0 && $_POST['email'] == "admin@admin.com" && $_POST["password"] == "admin")
+     * return $this->task();
+     * else
+     * return $this->render('login.html.twig');
+     *
+     * }*/
 
     /**
      * @Route("/save")
