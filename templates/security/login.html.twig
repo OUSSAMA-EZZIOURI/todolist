@@ -13,45 +13,51 @@
 
 <body id="LoginForm">
 <div class="container">
-    <h1 class="form-heading">Todo list app | Sign in !</h1>
+    <h1 class="form-heading">Todo list app | {% trans %}Sign in !{% endtrans %}</h1>
     <div class="login-form">
         <div class="main-div">
             <div class="panel">
                 <h2>Admin Login</h2>
-                <p>Please enter your email and password</p>
+                <p>
+                    {% trans %}Please enter your email and password{% endtrans %}
+                </p>
             </div>
             <form id="Login" method="post">
 
                 <div class="form-group">
 
-                    <input type="email" name="email" class="form-control" id="inputEmail" placeholder="Email Address" value="{{ last_username }}">
+                    <input type="email" name="_username" class="form-control" id="inputEmail"
+                           placeholder="Email Address" value="{{ last_username }}">
 
                 </div>
 
                 <div class="form-group">
 
-                    <input type="password" name="password" class="form-control" id="inputPassword" placeholder="Password" required>
+                    <input type="password" name="_password" class="form-control" id="inputPassword"
+                           placeholder="Password" required>
 
                 </div>
 
-                <input type="hidden" name="csrf_token"
+                <input type="hidden" name="_csrf_token"
                        value="{{ csrf_token('authenticate') }}"
                 >
 
                 {% if error %}
                     <div class="alert alert-danger">
-                        {% if error %}
-                            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-                        {% endif %}
+                        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
                     </div>
                 {% endif %}
 
                 <div class="checkbox mb-3">
                     <label>
-                        <input type="checkbox" value="remember-me" name="remember_me"> Remember me
+                        <input type="checkbox" value="remember-me"
+                               name="_remember_me"> {% trans %}Remember me{% endtrans %}
                     </label>
                 </div>
-                <button type="submit" class="btn btn-primary">Login</button>
+                <input type="text" name="_target_path" value="{{ app.request.headers.get('referer') }}" />
+                <button type="submit" class="btn btn-primary">{% trans %}Login{% endtrans %}</button>
+
+
 
             </form>
         </div>

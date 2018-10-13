@@ -34,6 +34,7 @@
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             </form>
             <li class="nav-item dropdown">
+                {% if app.user %}
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">
                     <div><i class="fas fa-user-circle fa-fw"></i> {{ app.user.username }}</div>
@@ -49,6 +50,11 @@
                         <div><i class="fas fa-sign-out-alt fa-fw"></i> Logout</div>
                     </a>
                 </div>
+                {% else %}
+                <a class="nav-link" href="{{ path("app_login") }}">
+                    <div><i class="fas fa-sign-in-alt"></i> {% trans %}Sign in !{% endtrans %}</div>
+                </a>
+                {% endif %}
             </li>
         </div>
     </nav>

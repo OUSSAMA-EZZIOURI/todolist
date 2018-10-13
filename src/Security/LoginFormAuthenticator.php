@@ -17,6 +17,7 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticator;
+use Symfony\Component\Security\Http\Util\TargetPathTrait;
 
 
 class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
@@ -28,6 +29,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
      */
     private $csrfTokenManager;
     private $passwordEncoder;
+    use TargetPathTrait;
 
     public function __construct(UserRepository $userRepository, RouterInterface $router, CsrfTokenManagerInterface $csrfTokenManager, UserPasswordEncoderInterface $passwordEncoder)
     {
@@ -47,9 +49,9 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
     {
 
         $credentials = [
-            'email' => $request->request->get('email'),
-            'password' => $request->request->get('password'),
-            'csrf_token' => $request->request->get('csrf_token'),
+            'email' => $request->request->get('_username'), //We use email as username
+            'password' => $request->request->get('_password'),
+            'csrf_token' => $request->request->get('_csrf_token'),
         ];
         $request->getSession()->set(
             Security::LAST_USERNAME,
@@ -76,17 +78,34 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
     {
+        $translator = new Translator('fr');
+        //dd($translator);
+        //$translated = $translator->trans($exception->getMessageKey());
         //dd($request->attributes);
         return new Response(
-            $exception->getMessageKey()
+            $translator->trans($exception->getMessageKey())
         );
     }
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
+
         //$response = new RedirectResponse($this->router->generate('app_homepage'));
         //$response->send();
         return new RedirectResponse($this->router->generate('app_homepage'));
+        //dd($request);
+        //echo $providerKey;
+        //$targetPath = $this->getTargetPath($request->getSession(), $providerKey);
+        //echo "targetPath ".$targetPath;
+        //dd($request->getSession());
+        //'_security.'.$providerKey.'.target_path'
+
+        //dd($request->getSession());
+//        $targetPath = $this->getTargetPath($request->getSession(), $providerKey) ?:
+//            $this->router->generate("app_homepage");
+//
+//        return new RedirectResponse($targetPath);
+
     }
 
     public function start(Request $request, AuthenticationException $authException = null)
